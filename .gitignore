@@ -1,0 +1,48 @@
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+*~
+.idea #PHP Storm
+.orig #git diff
+*.swp
+*.lock
+
+# Logs #
+########
+*.log
+
+
+# Backup Thrash #
+#################
+*.old
+*.bak
+*.bk
+*.tmp
+*.temp
+
+# netbeans specific #
+#####################
+core
+nbproject/*
+!nbproject/project.properties
+!nbproject/project.xml
+
+# Composer #
+############
+vendor
+build
+
+# PHPStorm #
+############
+.idea
+
+# HTML Cover #
+##############
+tests/html
