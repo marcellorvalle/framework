@@ -35,7 +35,7 @@ class Request {
         $request->agent = $_SERVER['HTTP_USER_AGENT'];
         $request->script = $_SERVER['SCRIPT_FILENAME'];
         $request->uri = $_SERVER['REQUEST_URI'];
-        $request->pathinfo = $_SERVER['PATH_INFO'];
+        $request->pathinfo = $_SERVER['PATH_INFO'] ?? null;
         $request->method = $_SERVER['REQUEST_METHOD'];
         $request->time = $_SERVER['REQUEST_TIME'];
 
