@@ -1,12 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Marcello
- * Date: 29/09/2016
- * Time: 15:14
- */
-
-namespace mrv\network;
+namespace mrv\framework\network;
 
 
 class Request {
@@ -21,8 +14,7 @@ class Request {
     private $pathinfo;
     private $method;
     private $time;
-
-    private function __construct() { }
+    private $accept;
 
     public static function buildRequest() {
         $request = new static;
@@ -38,6 +30,7 @@ class Request {
         $request->pathinfo = $_SERVER['PATH_INFO'] ?? null;
         $request->method = $_SERVER['REQUEST_METHOD'];
         $request->time = $_SERVER['REQUEST_TIME'];
+        $request->accept = $_SERVER['HTTP_ACCEPT'] ?? null;
 
         return $request;
     }
@@ -114,12 +107,14 @@ class Request {
         return $this->method;
     }
 
-    /**
-     * @return mixed
-     */
     public function getTime() {
         return $this->time;
     }
+
+    public function getAccept() {
+        return $this->accept;
+    }
+
 
     public function isPost() {
         return $this->method === 'post';
@@ -127,6 +122,10 @@ class Request {
 
     public function isGet() {
         return $this->method === 'get';
+    }
+
+    public function getData() {
+        return [];
     }
 
 }

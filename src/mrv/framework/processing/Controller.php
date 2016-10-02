@@ -1,12 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Marcello
- * Date: 29/09/2016
- * Time: 22:08
- */
-
-namespace mrv\processing;
+namespace mrv\framework\processing;
 
 
 abstract class Controller {
@@ -33,7 +26,5 @@ abstract class Controller {
     }
 
     public function init() {}
-    public function beforeAction($method) {}
-    public function afterAction($method) {}
     public function finalize() {}
 }
