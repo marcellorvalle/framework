@@ -28,4 +28,8 @@ class Response {
         return $this->data;
     }
 
+    public function getVars() {
+        return get_object_vars($this);
+    }
+
 }

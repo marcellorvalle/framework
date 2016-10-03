@@ -6,7 +6,8 @@ spl_autoload_register(function($class) {
 
     $includeDirs = [
         '.',
-        '..' . $ds . 'apps'
+        '..' . $ds . 'apps',
+        '..' . $ds . 'plugins'
     ];
 
     foreach ($includeDirs as $dir) {
