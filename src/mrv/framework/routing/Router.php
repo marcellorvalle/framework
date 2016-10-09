@@ -39,7 +39,7 @@ class Router {
 
         foreach ($this->routes[$method] as $uri => $action) {
             $pattern = $this->buildPattern($uri);
-            if (preg_match($pattern, $request->getPathinfo(), $params)) {
+            if (preg_match($pattern, $request->getRequestTarget(), $params)) {
                 return ActionWrapper::create($action, $request, $params)->call();
             }
         }

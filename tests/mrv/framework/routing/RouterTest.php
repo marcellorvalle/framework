@@ -61,7 +61,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase {
 
     private function createGetRequest() {
         $request = \Phake::mock(Request::class);
-        \Phake::when($request)->getPathinfo()->thenReturn('/examples/value1/value2');
+        \Phake::when($request)->getRequestTarget()->thenReturn('/examples/value1/value2');
         \Phake::when($request)->getMethod()->thenReturn('GET');
         return $request;
     }
