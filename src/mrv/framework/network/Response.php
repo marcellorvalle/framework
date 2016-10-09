@@ -2,7 +2,9 @@
 namespace mrv\framework\network;
 
 
-class Response {
+use phpDocumentor\Reflection\Types\This;
+
+class Response extends Message implements IResponse{
     const STATUS_OK = 200;
     const STATUS_BAD_REQUEST = 400;
     const STATUS_NOT_FOUND = 404;
@@ -10,46 +12,23 @@ class Response {
 
     private $statusCode;
     private $statusMessage;
-    private $body;
 
-    public static function create($statusCode, $statusMessage, $body = []) {
+    public static function create($statusCode, $reason = '', $body = []) {
         $response = new static;
-
-        $response->body = $body;
-        $response->statusCode = $statusCode;
-        $response->statusMessage = $statusMessage;
-        return $response;
-    }
-
-    public function setStatusCode($statusCode): Response {
-        $this->statusCode = $statusCode;
-        return $this;
-    }
-
-    public function setStatusMessage($statusMessage): Response {
-        $this->statusMessage = $statusMessage;
-        return $this;
-    }
-
-    public function setBody($body): Response {
-        $this->body = $body;
-        return $this;
+        return $response->withStatusCode($statusCode, $reason)->withBody($body);
     }
 
     public function getStatusCode() {
         return $this->statusCode;
     }
 
-    public function getStatusMessage() {
+    public function withStatusCode($status, $reason = ''): IResponse {
+        $this->statusCode = $status;
+        $this->statusMessage = $reason;
+        return $this;
+    }
+
+    public function getReason() {
         return $this->statusMessage;
     }
-
-    public function getBody() {
-        return $this->body;
-    }
-
-    public function getVars() {
-        return get_object_vars($this);
-    }
-
 }

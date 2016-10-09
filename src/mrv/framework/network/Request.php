@@ -2,52 +2,11 @@
 namespace mrv\framework\network;
 
 
-class Request implements IRequest{
-    private $headers;
-    private $body;
-
-
+class Request extends Message implements IRequest{
     public static function buildRequest() {
         $request = new static;
         $request->headers = $_SERVER;
         return $request;
-    }
-
-    public function getProtocolVersion() {
-        return $this->headers['SERVER_PROTOCOL'];
-    }
-
-    /** @return static */
-    public function withProtocolVersion($protocol) {
-        $this->headers['SERVER_PROTOCOL'] = $protocol;
-        return $this;
-    }
-
-    public function getHeaders() {
-        return $this->headers;
-    }
-
-    public function hasHeader($name) {
-        return isset($this->headers[$name]);
-    }
-
-    public function getHeader($name) {
-        return $this->headers[$name];
-    }
-
-    /** @return static */
-    public function withHeader($name, $value) {
-        $this->$this->headers[$name] = $value;
-        return $this;
-    }
-
-    public function getBody() {
-        return $this->body;
-    }
-
-    /** @return static */
-    public function withBody($body) {
-        $this->body = $body;
     }
 
     public function getRequestTarget() {

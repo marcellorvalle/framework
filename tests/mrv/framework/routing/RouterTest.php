@@ -13,9 +13,9 @@ class RouterTest extends \PHPUnit_Framework_TestCase {
         $mr = new Router();
         $mr->add('GET', '/examples/value1/value2',
             function(Request $request, Response $response, $parameters) {
-                $response->setStatusCode(Response::STATUS_OK)->setStatusMessage('OK')->setBody('testGetResponse');
-                return $response;
-        });
+                return $response->withStatusCode(Response::STATUS_OK, 'OK')->withBody('testGetResponse');
+            }
+        );
 
         $response = $mr->getResponse($request);
         $this->assertEquals('testGetResponse', $response->getBody());
@@ -28,9 +28,9 @@ class RouterTest extends \PHPUnit_Framework_TestCase {
         $mr->add('GET', '/examples/{param1}/{param2}',
             function(Request $request, Response $response, $parameters) {
                 $expected = ['param1' => 'value1', 'param2' => 'value2'];
-                $response->setBody($expected === $parameters);
-                return $response;
-        });
+                return  $response->withBody($expected === $parameters);
+            }
+        );
 
         $response = $mr->getResponse($request);
         $this->assertTrue($response->getBody());
@@ -42,7 +42,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase {
         $response = $mr->getResponse($request);
 
         $this->assertEquals(Response::STATUS_NOT_FOUND, $response->getStatusCode());
-        $this->assertEquals('Not Found', $response->getStatusMessage());
+        $this->assertEquals('Not Found', $response->getReason());
     }
 
     public function testGetResponseInternalError() {
