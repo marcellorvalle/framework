@@ -10,7 +10,7 @@ class Request extends Message implements IRequest{
     }
 
     public function getRequestTarget() {
-        return $this->headers['PATH_INFO'];
+        return $this->headers['PATH_INFO'] ?? '/';
     }
 
     public function withRequestTarget($target): IRequest {
