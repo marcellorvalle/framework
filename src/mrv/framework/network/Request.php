@@ -3,7 +3,9 @@ namespace mrv\framework\network;
 
 
 class Request extends Message implements IRequest{
-    public static function buildRequest() {
+    private function __construct() {}
+
+    public static function create() : IRequest {
         $request = new static;
         $request->headers = $_SERVER;
         return $request;

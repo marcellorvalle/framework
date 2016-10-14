@@ -13,9 +13,8 @@ class Response extends Message implements IResponse{
     private $statusCode;
     private $statusMessage;
 
-    public static function create($statusCode, $reason = '', $body = []) {
-        $response = new static;
-        return $response->withStatusCode($statusCode, $reason)->withBody($body);
+    public static function create() {
+        return new static;
     }
 
     public function getStatusCode() {

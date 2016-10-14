@@ -8,6 +8,10 @@ use mrv\framework\network\Response;
 class Router {
     private $routes = [];
 
+    public static function create() {
+        return new static;
+    }
+
     public function get($uri, \Closure $action) {
         $this->add('get', $uri, $action);
     }
@@ -44,6 +48,6 @@ class Router {
             }
         }
 
-        return Response::create(Response::STATUS_NOT_FOUND, 'Not Found');
+        return Response::create()->withStatusCode(Response::STATUS_NOT_FOUND, 'Not Found');
     }
 }

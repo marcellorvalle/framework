@@ -29,7 +29,9 @@ class ActionWrapper {
         try {
             return $this->tryCallAction();
         } catch (\Exception $ex) {
-            return Response::create(Response::STATUS_INTERNAL_ERROR,'Internal Server Error', $ex->getMessage());
+            return Response::create()
+                ->withStatusCode(Response::STATUS_INTERNAL_ERROR, 'Internal Server Error')
+                ->withBody($ex->getMessage());
         }
     }
 

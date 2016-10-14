@@ -31,7 +31,7 @@ class FrontController {
         if ($control['interrupt']) {
             $response = $control['response'];
         } else {
-            $response = $this->router->getResponse($request);
+            $response = $this->router->getResponse($control['request']);
         }
 
         $this->doHook('after_routing', ['request' => $request, 'response' => $response]);
@@ -41,7 +41,7 @@ class FrontController {
 
     private function render(IResponse $response) {
         $this->doHook('rendering', ['response' => $response]);
-        return is_string($response->getBody()) ? $response->getBody() : print_r($response->getBody());
+        return $response->getBody();
     }
 
     private function doHook($hookName, $control) {
