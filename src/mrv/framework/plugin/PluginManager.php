@@ -13,6 +13,10 @@ use mrv\framework\network\Response;
 
 class PluginManager {
     private $plugins = [];
+
+    public static function create() {
+        return new static;
+    }
     
     public function add($name, $hook, \Closure $action) {
         $this->plugins[$hook][$name] = $action;

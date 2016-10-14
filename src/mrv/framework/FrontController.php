@@ -4,6 +4,7 @@ namespace mrv\framework;
 
 use mrv\framework\network\IResponse;
 use mrv\framework\network\Request;
+use mrv\framework\network\Response;
 use mrv\framework\plugin\PluginManager;
 use mrv\framework\routing\Router;
 
@@ -26,16 +27,16 @@ class FrontController {
     }
 
     public function process(Request $request) {
-        $control = $this->doHook('before_routing', ['request' => $request]);
+        $control = ['request' => $request];
+        $control = $this->doHook('before_routing', $control);
 
-        if ($control['interrupt']) {
-            $response = $control['response'];
-        } else {
-            $response = $this->router->getResponse($control['request']);
+        if (!$control['interrupt']) {
+            $control['response'] = $this->router->getResponse($control['request']);
         }
 
-        $this->doHook('after_routing', ['request' => $request, 'response' => $response]);
-
+        $control = $this->doHook('after_routing', $control);
+        $response = $control['response'] ?? Response::create()->withStatusCode(Response::STATUS_BAD_REQUEST);
+        
         return $this->render($response);
     }
 
